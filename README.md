@@ -1,3 +1,3 @@
 # Lab 9 - Starter
 Brian Liu
-Github Pages: (Link)[https://github.com/brianliu1412/Lab9_Starter/deployments/activity_log?environment=github-pages]
+Github Pages: (Link)[https://brianliu1412.github.io/Lab9_Starter/]
