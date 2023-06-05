@@ -86,8 +86,21 @@
       <button>Trigger a Global Error</button>
     </section>
   </main>
-
+  
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "7264f61c16074903a0bd194d9b1dc788"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+  <script>
+    class customError extends Error {
+      constructor(message) {
+        super(message); 
+        this.name = "customError"; 
+      }
+    }
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
       e.preventDefault();
@@ -99,9 +112,94 @@
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
+    let output = document.querySelector('output');
 
     // Start your code here
     // You may move this JS to another file if you wish
+    errorBtns[0].addEventListener("click", function() {
+      console.log("Console Log Demo");
+    });
+
+    errorBtns[1].addEventListener("click", function() {
+      console.error("Console Error Demo");
+    });
+
+    errorBtns[2].addEventListener("click", function() {
+      console.count("Count");
+    });
+
+    errorBtns[3].addEventListener("click", function() {
+      console.warn("Warn");
+    });
+    errorBtns[4].addEventListener("click", function() {
+      console.assert(2 + 4 == 11, "Expression returned false");
+    });
+
+    errorBtns[5].addEventListener("click", function() {
+      console.clear();
+    });
+
+    errorBtns[6].addEventListener("click", function() {
+      console.dir(document);
+    });
+    
+    errorBtns[7].addEventListener("click", function() {
+      console.dirxml(document);
+    });
+
+    errorBtns[8].addEventListener("click", function() {
+      console.group();
+    });
+
+    errorBtns[9].addEventListener("click", function() {
+      console.groupEnd();
+    });
+
+    errorBtns[10].addEventListener("click", function() {
+      console.table(["apples", "oranges", "bananas"]);
+    });
+
+    errorBtns[11].addEventListener("click", function() {
+      console.time();
+    });
+
+    errorBtns[12].addEventListener("click", function() {
+      console.timeEnd();
+    });
+
+    errorBtns[13].addEventListener("click", function() {
+      console.trace();
+    });
+
+    errorBtns[14].addEventListener("click", function() {
+      reportError("Error");
+      throw new customError("Whoops!");
+      TrackJS.track('Testing TrackJS!');
+    });
+
+    TrackJS.track('Testing TrackJS!');
+
+    window.onerror = (a) => {
+      console.log(`message: ${a}`);
+      return true;
+    };
+
+    try {
+      document.querySelector("HI");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      throw new Error('Error');
+    }
+
+    
+
+    
+
+  
+
+
+
   </script>
 </body>
 
